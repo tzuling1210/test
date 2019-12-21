@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>
+        {% block page_title %}
+            小雞麵產銷資訊系統
+        {% endblock %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% include "base/style.html" %}
+    {% include "base/script.html" %}
+
+    <style>
+        main{
+            padding: 1% 1% 15% 1%;
+            font-size: 13.5pt;
+            font-family: Microsoft JhengHei!important;
+        }
+    </style>
+</head>
+<body>
+    {% include 'components/navbar.html'%}
+    <div class="ui container">
+        <main>
+            {% block main %}
+
+            {% endblock %}
+        </main>
+        {% block custom_script %}
+        {% endblock %}
+    </div>
+</body>
+</html>

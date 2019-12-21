@@ -1,0 +1,137 @@
+{% extends 'base/layout.html' %}
+
+{% block main %}
+<h2>歷年月銷售狀況</h2>
+
+<br>
+<p>請點選欲查詢月份：</p>
+<form action="{% url 'transaction:month' %}" method="POST" class="ui form">{% csrf_token %}
+    <div class="fields">
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="1">1月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="2">2月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="3">3月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="4">4月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="5">5月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="6">6月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="7">7月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="8">8月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="9">9月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="10">10月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="11">11月</button>
+        </div>
+        <div class="field">
+            <button type="submit" name="month" class="ui teal button" value="12">12月</button>
+        </div>
+    </div>
+</form>
+<br>
+{% comment %} {% if req_month %}
+<h3>{{ req_month }}月</h3>
+<table class="ui sortable celled table">
+    <thead>
+        <tr>
+            <th>產品名稱</th>
+            <th class="sorted ascending">2016</th>
+            <th class="sorted ascending">2017</th>
+            <th class="sorted ascending">2018</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for key, values in product_dict.items %}
+        <tr>
+            <td>{{ key }}</td>
+            {% for v in values %}
+            <td>{{ v }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %} {% endcomment %}
+<div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+        },
+        title: {
+            text: '歷年{{ req_month }}月銷售狀況'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: [
+                '2016',
+                '2017',
+                '2018',
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '銷售量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} 包</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '雞汁小雞麵',
+            data: {{ product_dict.雞汁小雞麵 }}
+        }, {
+            name: '辣味小雞麵',
+            data: {{ product_dict.辣味小雞麵 }}
+        }, {
+            name: '海苔小雞麵',
+            data: {{ product_dict.海苔小雞麵 }}
+        }, {
+            name: '起司小雞麵',
+            data: {{ product_dict.起司小雞麵 }}
+        }, {
+            name: 'BBQ小雞麵',
+            data: {{ product_dict.BBQ小雞麵 }}
+        },],
+    });
+</script>
+
+{% load static %}
+<script src="{% static 'js/dropdown.js' %}"></script>
+<script src="{% static 'js/tablesort.js' %}"></script>
+
+{% endblock %}

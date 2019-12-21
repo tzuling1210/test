@@ -1,0 +1,18 @@
+{% extends 'base/layout.html' %}
+
+{% block main %}
+<h2>更新存貨：{{ product.name }}</h2>
+<br>
+<form method="post" class="ui form">{% csrf_token %}
+    <div class="inline fields">
+        <div class="six wide field">
+            {{ form.as_p }}
+        </div>
+    </div>
+    <input type="submit" value="Update" class="ui teal button">
+</form>
+
+{% load static %}
+<script src="{% static 'js/dropdown.js' %}"></script>
+
+{% endblock %}

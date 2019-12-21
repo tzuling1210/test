@@ -1,0 +1,31 @@
+<div class="ui inverted menu">
+    <div class="ui container">
+        <a class="header item" href="{% url 'homepage' %}">
+            {% load static %}
+            <img id="nav-img" src="{% static 'images/logo.png' %}">
+        </a>
+        <!-- <div class="ui simple dropdown item"> -->
+            <!-- 存貨管理 <i class="dropdown icon"></i> -->
+            <!-- <div class="menu"> -->
+        <a class="item" href="{% url 'inventory:list' %}">存貨管理</a>
+            <!-- </div> -->
+        <!-- </div> -->
+        <div class="ui simple dropdown item">
+            銷售查詢 <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="{% url 'transaction:year' %}">年銷售狀況</a>
+                <a class="item" href="{% url 'transaction:season' %}">季銷售狀況</a>
+                <a class="item" href="{% url 'transaction:month' %}">月銷售狀況</a>
+            </div>
+        </div>
+        <a class="item" href="{% url 'inventory:schedule_form' %}">生產排程</a>
+        <a class="item" href="{% url 'activity:detail' %}">行銷績效</a>
+        <a class="item" href="{% url 'member:search' %}">顧客查詢</a>
+        <a class="item" href="{% url 'member:piechart' %}">顧客分布</a>
+    </div>
+</div>
+
+<br>
+
+{% load static %}
+<script src="{% static 'js/dropdown.js' %}"></script>
